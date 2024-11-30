@@ -1,0 +1,43 @@
+# Camera Configuration
+camera:
+  device_id: 0  # ID della camera CSI/USB
+  resolution:
+    width: 1920
+    height: 1080
+  fps: 30
+  format: "MJPG"
+  buffer_size: 10  # Number of frames to buffer
+
+# GPS Configuration
+gps:
+  port: "/dev/ttyUSB0"
+  baudrate: 9600
+  timeout: 1.0
+  update_interval: 1.0  # seconds
+
+# OBD Configuration
+obd:
+  port: "/dev/ttyUSB1"
+  baudrate: 38400
+  timeout: 1.0
+  protocol: "AUTO"
+  commands:
+    - "SPEED"
+    - "RPM"
+    - "THROTTLE_POS"
+    - "ENGINE_LOAD"
+
+# Storage Configuration
+storage:
+  base_path: "/data"
+  video_format: "mp4"
+  max_file_size: 1073741824  # 1GB in bytes
+  sync_interval: 300  # seconds
+  retention_days: 7
+
+# System Monitor Configuration
+system:
+  temperature_threshold: 80  # Celsius
+  memory_threshold: 85  # Percentage
+  cpu_threshold: 90  # Percentage
+  check_interval: 5  # seconds

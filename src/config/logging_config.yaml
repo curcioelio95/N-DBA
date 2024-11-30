@@ -1,0 +1,53 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  standard:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  error:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s - %(pathname)s:%(lineno)d'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: standard
+    stream: ext://sys.stdout
+
+  file_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: standard
+    filename: /var/log/jetson_app/app.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+    encoding: utf8
+
+  error_file_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: ERROR
+    formatter: error
+    filename: /var/log/jetson_app/error.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+    encoding: utf8
+
+loggers:
+  camera:
+    level: INFO
+    handlers: [console, file_handler, error_file_handler]
+    propagate: false
+
+  gps:
+    level: INFO
+    handlers: [console, file_handler, error_file_handler]
+    propagate: false
+
+  obd:
+    level: INFO
+    handlers: [console, file_handler, error_file_handler]
+    propagate: false
+
+root:
+  level: INFO
+  handlers: [console, file_handler, error_file_handler]
